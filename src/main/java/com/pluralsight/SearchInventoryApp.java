@@ -14,19 +14,20 @@ public class SearchInventoryApp {
                     p.getID(), p.getName(), p.getPrice());
         }
     }
+
     public static ArrayList<Product> getInventory() {
+
+        //create EMPTY ArrayList
+        ArrayList<Product> inventory = new ArrayList<>();
         //try and catch statement
         try {
             //filereader and bufferedreader to read inventory.csv
             FileReader fileReader = new FileReader("src/main/resources/inventory.csv");
             BufferedReader buffReader = new BufferedReader(fileReader);
 
-            //create ArrayList
-            ArrayList<Product> inventory = getInventory();
-
             //initialize String line to assign it the lines that buff reader
             String line;
-            while((line = buffReader.readLine()) != null) {
+            while ((line = buffReader.readLine()) != null) {
 
                 //parsing the information being read and splitting by |
                 //3 parts, ID, product name, and price
@@ -42,8 +43,9 @@ public class SearchInventoryApp {
             fileReader.close();
 
             //prints file could not be found if error
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("File could not be found.");
+        }
+        return inventory;
     }
-
 }
