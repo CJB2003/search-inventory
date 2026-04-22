@@ -28,7 +28,7 @@ public class SearchInventoryApp {
                 listAllProducts();
                 break;
             case 2:
-                listByProductID();
+                listByProductID(getInventory());
                 break;
             case 3:
                 listByPriceRange();
@@ -79,6 +79,7 @@ public class SearchInventoryApp {
         }
         return inventory;
     }
+    //method for listing all products
     public static void listAllProducts() {
 
         ArrayList<Product> inventory = getInventory();
@@ -94,13 +95,28 @@ public class SearchInventoryApp {
             System.out.println(objectP.getID() + " | " + objectP.getName() + " | " + objectP.getPrice());
         }
     }
-    public static void listByProductID() {
+    //method for finding by product id
+    public static void listByProductID(ArrayList<Product> inventory) {
 
+        System.out.print("Enter a product ID: ");
+        int ID = myScanner.nextInt();
 
+        //iterates through the array inventory and checks
+        //if the ID user input matches an ID in the inventory,
+        //if it does, it will print out the product, otherwise it wasn't found
+        for (Product product : inventory) {
+            if (product.getID() == ID) {
+                System.out.println(product.getID() + " | " + product.getName() + " | " + product.getPrice());
+                return;
+            }
+        }
+        System.out.println("Product was not found. Try again.");
     }
+    //method for finding product by price range
     public static void listByPriceRange() {
 
     }
+    //method for adding a product to inventory
     public static void addAProduct() {
 
 
