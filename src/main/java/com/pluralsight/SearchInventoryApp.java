@@ -2,13 +2,22 @@ package com.pluralsight;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class SearchInventoryApp {
     static void main(String[] args) {
 
         ArrayList<Product> inventory = getInventory();
         for(int i = 0; i < inventory.size(); i++){
-            System.out.println(inventory.get(i));
+            //storing the product information into objectP
+            Product objectP = inventory.get(i);
+
+            Collections.sort(inventory, Comparator.comparing(Product::getName));
+
+            //using getters to get that information and printing it out
+            System.out.println(objectP.getID() + " | " + objectP.getName() + " | " + objectP.getPrice());
+
         }
     }
 
