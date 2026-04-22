@@ -7,11 +7,8 @@ public class SearchInventoryApp {
     static void main(String[] args) {
 
         ArrayList<Product> inventory = getInventory();
-        System.out.println("");
-        for (int i = 0; i < inventory.size(); i++) {
-            Product p = inventory.get(i);
-            System.out.printf("ID: %d | %s - Price: $%.2f%n",
-                    p.getID(), p.getName(), p.getPrice());
+        for(int i = 0; i < inventory.size(); i++){
+            System.out.println(inventory.get(i));
         }
     }
 
@@ -38,6 +35,9 @@ public class SearchInventoryApp {
 
                 //creating new object to store the parts into them
                 Product product = new Product(ID, pName, price);
+
+                //adding the object product to the Array List
+                inventory.add(product);
             }
             //closing the file reader
             fileReader.close();
