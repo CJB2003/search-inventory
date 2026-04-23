@@ -131,6 +131,6 @@ public class SearchInventoryApp {
     //method for adding a product to inventory
     public static void addAProduct() {
 
-
+        //
     }
 }
