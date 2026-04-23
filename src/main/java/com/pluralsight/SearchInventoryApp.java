@@ -1,6 +1,8 @@
 package com.pluralsight;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -34,7 +36,7 @@ public class SearchInventoryApp {
                 listByPriceRange(getInventory());
                 break;
             case 4:
-                addAProduct();
+                addAProduct(getInventory());
                 break;
             case 5:
                 //exits out of the program
@@ -129,8 +131,34 @@ public class SearchInventoryApp {
 
     }
     //method for adding a product to inventory
-    public static void addAProduct() {
+    public static void addAProduct(ArrayList<Product> inventory) {
 
-        //
+        try {
+            FileWriter writer = new FileWriter("src/main/resources/inventory.csv", true);
+            BufferedWriter bufWriter = new BufferedWriter(writer);
+            //prompting user to add a product
+            System.out.println("Let's add a product.");
+            System.out.println("--------------------");
+            System.out.print("Enter an ID: ");
+            int pID = myScanner.nextInt();
+            myScanner.nextLine();
+            System.out.print("Enter a product name: ");
+            String pName = myScanner.nextLine();
+            System.out.print("Enter a price for the product: ");
+            double pPrice = myScanner.nextDouble();
+
+            Product addProduct = new Product(pID, pName, pPrice);
+            inventory.add(addProduct);
+            bufWriter.write("\n" + addProduct.getID() + " | " + addProduct.getName() + " | " + addProduct.getPrice());
+
+            System.out.println("You've added the product: "
+                    + addProduct.getID()
+                    + " | " + addProduct.getName()
+                    + " | " + addProduct.getPrice()
+            );
+            bufWriter.close();
+        } catch (Exception e) {
+            System.out.println("Could not write to file.");
+        }
     }
 }
