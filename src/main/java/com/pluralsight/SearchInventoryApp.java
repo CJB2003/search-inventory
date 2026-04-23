@@ -31,7 +31,7 @@ public class SearchInventoryApp {
                 listByProductID(getInventory());
                 break;
             case 3:
-                listByPriceRange();
+                listByPriceRange(getInventory());
                 break;
             case 4:
                 addAProduct();
@@ -113,7 +113,19 @@ public class SearchInventoryApp {
         System.out.println("Product was not found. Try again.");
     }
     //method for finding product by price range
-    public static void listByPriceRange() {
+    public static void listByPriceRange(ArrayList<Product> inventory) {
+        //prompts the user to enter a minimum price
+        System.out.print("Enter a minimum price: ");
+        double userMin = myScanner.nextDouble();
+
+        System.out.print("Enter a maximum price: ");
+        double userMax = myScanner.nextDouble();
+
+        for (Product product : inventory) {
+            if (product.getPrice() >= userMin && product.getPrice() <= userMax) {
+                System.out.println(product.getID() + " | " + product.getName() + " | " + product.getPrice());
+            }
+        }
 
     }
     //method for adding a product to inventory
