@@ -11,36 +11,40 @@ public class SearchInventoryApp {
     static Scanner myScanner = new Scanner(System.in);
     static void main(String[] args) {
 
-        //menu asking user what they want to do
-        System.out.print("What do you want to do?\n" +
-                "1- List all products\n" +
-                "2- Lookup a product by its id\n" +
-                "3- Find all products within a price range\n" +
-                "4- Add a new product\n" +
-                "5- Quit the application\n" +
-                "Enter command: "
-        );
-        //user input for command
-        int command = myScanner.nextInt();
-        myScanner.nextLine();
-        //switch statement for the choices
-        switch (command) {
-            case 1:
-                listAllProducts();
-                break;
-            case 2:
-                listByProductID(getInventory());
-                break;
-            case 3:
-                listByPriceRange(getInventory());
-                break;
-            case 4:
-                addAProduct(getInventory());
-                break;
-            case 5:
-                //exits out of the program
-                System.out.println("Exiting...");
-                System.exit(0);
+        while (true) {
+            //menu asking user what they want to do
+            System.out.print("What do you want to do?\n" +
+                    "1- List all products\n" +
+                    "2- Lookup a product by its id\n" +
+                    "3- Find all products within a price range\n" +
+                    "4- Add a new product\n" +
+                    "5- Quit the application\n" +
+                    "Enter command: "
+            );
+            //user input for command
+            int command = myScanner.nextInt();
+            myScanner.nextLine();
+            //switch statement for the choices
+            switch (command) {
+                case 1:
+                    listAllProducts();
+                    break;
+                case 2:
+                    listByProductID(getInventory());
+                    break;
+                case 3:
+                    listByPriceRange(getInventory());
+                    break;
+                case 4:
+                    addAProduct(getInventory());
+                    break;
+                case 5:
+                    //exits out of the program
+                    System.out.println("Exiting...");
+                    System.exit(0);
+                default:
+                    System.out.println("You entered an invalid choice. Try again.");
+            }
         }
     }
 
@@ -86,11 +90,11 @@ public class SearchInventoryApp {
         ArrayList<Product> inventory = getInventory();
         System.out.print("\n");
 
+        inventory.sort(Comparator.comparing(Product::getName));
+
         for(int i = 0; i < inventory.size(); i++){
             //storing the product information into objectP
             Product objectP = inventory.get(i);
-
-            inventory.sort(Comparator.comparing(Product::getName));
 
             //using getters to get that information and printing it out
             System.out.println(objectP.getID() + "|" + objectP.getName() + "|" + objectP.getPrice());
