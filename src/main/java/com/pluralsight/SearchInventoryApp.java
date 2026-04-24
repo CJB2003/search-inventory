@@ -4,7 +4,6 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.*;
 
@@ -51,7 +50,7 @@ public class SearchInventoryApp {
         ArrayList<Product> inventory = new ArrayList<>();
         //try and catch statement
         try {
-            //filereader and bufferedreader to read inventory.csv
+            //file reader and buffered reader to read inventory.csv
             FileReader fileReader = new FileReader("src/main/resources/inventory.csv");
             BufferedReader buffReader = new BufferedReader(fileReader);
 
@@ -74,7 +73,7 @@ public class SearchInventoryApp {
             }
             //closing the file reader
             fileReader.close();
-
+            buffReader.close();
             //prints file could not be found if error
         } catch (Exception e) {
             System.out.println("File could not be found.");
@@ -94,7 +93,7 @@ public class SearchInventoryApp {
             inventory.sort(Comparator.comparing(Product::getName));
 
             //using getters to get that information and printing it out
-            System.out.println(objectP.getID() + " | " + objectP.getName() + " | " + objectP.getPrice());
+            System.out.println(objectP.getID() + "|" + objectP.getName() + "|" + objectP.getPrice());
         }
     }
     //method for finding by product id
@@ -108,7 +107,7 @@ public class SearchInventoryApp {
         //if it does, it will print out the product, otherwise it wasn't found
         for (Product product : inventory) {
             if (product.getID() == ID) {
-                System.out.println(product.getID() + " | " + product.getName() + " | " + product.getPrice());
+                System.out.println(product.getID() + "|" + product.getName() + "|" + product.getPrice());
                 return;
             }
         }
@@ -125,7 +124,7 @@ public class SearchInventoryApp {
 
         for (Product product : inventory) {
             if (product.getPrice() >= userMin && product.getPrice() <= userMax) {
-                System.out.println(product.getID() + " | " + product.getName() + " | " + product.getPrice());
+                System.out.println(product.getID() + "|" + product.getName() + "|" + product.getPrice());
             }
         }
 
@@ -149,12 +148,12 @@ public class SearchInventoryApp {
 
             Product addProduct = new Product(pID, pName, pPrice);
             inventory.add(addProduct);
-            bufWriter.write("\n" + addProduct.getID() + " | " + addProduct.getName() + " | " + addProduct.getPrice());
+            bufWriter.write("\n" + addProduct.getID() + "|" + addProduct.getName() + "|" + addProduct.getPrice());
 
             System.out.println("You've added the product: "
                     + addProduct.getID()
-                    + " | " + addProduct.getName()
-                    + " | " + addProduct.getPrice()
+                    + "|" + addProduct.getName()
+                    + "|" + addProduct.getPrice()
             );
             bufWriter.close();
         } catch (Exception e) {
